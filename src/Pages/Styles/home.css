@@ -1,0 +1,54 @@
+body {
+    margin: 0px 350px 0px 350px;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;   /* horizontally center all columns */
+  align-items: center;       /* vertically center content */
+  height: 100vh;             /* fill the viewport */
+  gap: 200px;                 /* space between columns */
+}
+
+.side-column {
+  display: flex;
+  flex-direction: column;    /* stack buttons vertically */
+  justify-content: center;   /* center vertically */
+  align-items: center;
+  gap: 100px;                 /* space between buttons */
+}
+
+.center-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pet {
+  width: 150px;
+  height: 150px;
+  animation: bounce 2s infinite;
+}
+
+.action-btn {
+  width: 200px;
+  height: 60px;
+  font-size: 1.5rem;
+  background: #FF9E9E;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background 0.2s;
+  border-radius: 20px 40px 15px 25px;
+}
+
+.action-btn:hover {
+  background: #C7C5E6;
+  transform: scale(1.1);
+}
+
+/* Simple bounce animation for the pet */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
