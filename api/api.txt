@@ -1,0 +1,140 @@
+# API Documentation
+
+This document describes the APIs implemented in the backend server. It provides details about the endpoints, their purpose, request formats, and responses. This information is sufficient for developing a frontend application.
+
+## 1. Create User
+- **Endpoint**: `POST /create_user`
+- **Description**: Create a new user account.
+- **Request Body**:
+  ```json
+  {
+    "name": "John Doe",
+    "email": "user@example.com",
+    "password": "password123"
+  }
+  ```
+- **Response**:
+  - `201 Created`: User created successfully.
+  - `400 Bad Request`: Invalid request body.
+  - `500 Internal Server Error`: User creation failed.
+
+---
+
+## 2. Create Pet
+- **Endpoint**: `POST /create_pet`
+- **Description**: Create a new pet for the authenticated user.
+- **Authentication**: Requires a valid OAuth2 token.
+- **Request Body**:
+  ```json
+  {
+    "name": "Fluffy"
+  }
+  ```
+- **Response**:
+  - `201 Created`: Pet created successfully.
+  - `400 Bad Request`: Invalid request body.
+  - `401 Unauthorized`: User not authenticated.
+  - `500 Internal Server Error`: Pet creation failed.
+
+---
+
+## 3. Add Co-Owner
+- **Endpoint**: `POST /add_co_owner`
+- **Description**: Add another user as a co-owner of a pet.
+- **Authentication**: Requires a valid OAuth2 token.
+- **Request Body**:
+  ```json
+  {
+    "pet_id": 1,
+    "user_id": 2
+  }
+  ```
+- **Response**:
+  - `200 OK`: Co-owner added successfully.
+  - `400 Bad Request`: Invalid request body.
+  - `401 Unauthorized`: User not authenticated.
+  - `500 Internal Server Error`: Co-owner addition failed.
+
+---
+
+## 4. OAuth2 Token
+- **Endpoint**: `POST /token`
+- **Description**: Obtain an OAuth2 token for authentication.
+- **Request Body**:
+  ```x-www-form-urlencoded
+  grant_type=client_credentials&client_id=client_id&client_secret=client_secret
+  ```
+- **Response**:
+  - `200 OK`: Returns an access token.
+  - `400 Bad Request`: Invalid client credentials.
+
+---
+
+## 5. Validate Token
+- **Endpoint**: `GET /validate`
+- **Description**: Validate an OAuth2 token.
+- **Authentication**: Requires a valid OAuth2 token.
+- **Response**:
+  - `200 OK`: Token is valid.
+  - `401 Unauthorized`: Token is invalid or expired.
+
+---
+
+## 6. WebSocket Connection
+- **Endpoint**: `GET /ws`
+- **Description**: Establish a WebSocket connection for real-time communication.
+- **Authentication**: Requires a valid OAuth2 token.
+- **Behavior**:
+  - Handles incoming messages and sends responses.
+  - Sends periodic ping messages to keep the connection alive.
+- **Message Format**:
+  - Incoming and outgoing messages follow the JSON schema defined in `websocket_message_schema.json`.
+
+---
+
+## 7. Obtaining OAuth2 Client Credentials
+To use the OAuth2 authentication system, you need to obtain `OAUTH2_CLIENT_ID` and `OAUTH2_CLIENT_SECRET`. Follow these steps:
+
+1. **Choose an OAuth2 Provider**:
+   - Google: [Google Cloud Console](https://console.cloud.google.com/)
+   - GitHub: [GitHub Developer Settings](https://github.com/settings/developers)
+   - Auth0: [Auth0 Dashboard](https://manage.auth0.com/)
+   - Okta: [Okta Admin Console](https://developer.okta.com/)
+
+2. **Register Your Application**:
+   - Go to the provider's developer console.
+   - Create a new application and provide a name.
+   - Specify the type of application (e.g., Web, Mobile, etc.).
+   - Set the **Redirect URI** to the endpoint where your application will handle OAuth2 responses (e.g., `http://localhost:8080/callback`).
+
+3. **Save the Client ID and Client Secret**:
+   - After registering, the provider will generate a **Client ID** and **Client Secret** for your application.
+   - These are your `OAUTH2_CLIENT_ID` and `OAUTH2_CLIENT_SECRET`.
+
+4. **Set Up Redirect URIs**:
+   - Ensure the redirect URI matches the one you configured in your application.
+   - For local development, use: `http://localhost:8080/callback`.
+   - For production, use your application's domain: `https://yourdomain.com/callback`.
+
+5. **Secure the Client Secret**:
+   - Never expose the `OAUTH2_CLIENT_SECRET` in your codebase.
+   - Use environment variables (e.g., `.env` file) to store sensitive keys.
+
+6. **Test the Credentials**:
+   - Use the OAuth2 token endpoint to verify your credentials:
+     ```bash
+     curl -X POST -d "grant_type=client_credentials&client_id=<your_client_id>&client_secret=<your_client_secret>" https://<oauth_provider>/token
+     ```
+
+---
+
+## Environment Variables
+- `OAUTH2_CLIENT_ID`: The client ID for OAuth2 authentication.
+- `OAUTH2_CLIENT_SECRET`: The client secret for OAuth2 authentication.
+- `LOG_LEVEL`: The logging level ("development" or "production").
+
+---
+
+## Logging
+- **Development**: Logs all messages sent and received, and all requests.
+- **Production**: Logs specific events (user login, pet creation, adding co-owners).

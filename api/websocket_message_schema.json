@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WebSocketMessage",
+  "description": "Schema for messages sent via WebSocket",
+  "oneOf": [
+    {
+      "title": "ValueChangeRequest",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["value_change_request"],
+          "description": "Indicates a request to change a value."
+        },
+        "pet_id": {
+          "type": "integer",
+          "description": "The ID of the pet whose value is being updated."
+        },
+        "attribute": {
+          "type": "string",
+          "enum": ["money", "health", "hunger", "happiness"],
+          "description": "The attribute of the pet being updated."
+        },
+        "amount": {
+          "type": "integer",
+          "description": "The amount by which the attribute is being updated."
+        }
+      },
+      "required": ["type", "pet_id", "attribute", "amount"],
+      "additionalProperties": false
+    },
+    {
+      "title": "ResultResponse",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["result_response"],
+          "description": "Indicates the result of a value change request."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["success", "fail"],
+          "description": "The status of the request."
+        },
+        "pet_id": {
+          "type": "integer",
+          "description": "The ID of the pet whose value was being updated."
+        },
+        "attribute": {
+          "type": "string",
+          "enum": ["money"],
+          "description": "The attribute of the pet that was updated."
+        },
+        "amount": {
+          "type": "integer",
+          "description": "The amount that was requested to be updated."
+        },
+        "new_value": {
+          "type": "integer",
+          "description": "The new value of the attribute after a successful update."
+        }
+      },
+      "required": ["type", "status", "pet_id", "attribute", "amount"],
+      "additionalProperties": false
+    },
+    {
+      "title": "PingPongMessage",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ping", "pong"],
+          "description": "Ping or Pong message for connection health checks."
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    }
+  ]
+}
