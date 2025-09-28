@@ -9,7 +9,7 @@ interface Props {
     itemCost: number
 }
 
-import spendMoney from '../state'
+import { spendMoney } from '../state'
 
 function ItemCard(props : Props) {
     const handleBuy = (amount : number) => {
