@@ -1,0 +1,87 @@
+main {
+  display: flex;
+  justify-content: center;   /* horizontally center all columns */
+  align-items: center;       /* vertically center content */
+  height: 100vh;             /* fill the viewport */
+  gap: 200px;  
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    gap: 20px;
+    width: 60%;
+    height: 50%;
+    border-left: 1px solid black;
+    padding-left: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+input {
+    display: block;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+}
+
+.field, input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0px 10px 5px;
+    align-self: center;
+}
+
+.warning {
+    color: #bb383c;
+    font-size: 12px;
+    font-style: italic;
+    text-align: center;
+    margin: 0px;
+}
+.register-link {
+    color: #C7C5E6;
+    font-weight: 600;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit; /* Inherit font styles from parent */
+    cursor: pointer;
+    outline: inherit; /* Inherit outline styles for accessibility */
+}
+
+.password-cont {
+    position: relative; /* Essential for positioning the button */
+    display: flex; /* Optional: Use flexbox for easy alignment */
+    align-items: center; /* Optional: Vertically center items in flexbox */
+    /* overflow: hidden;  */
+}
+
+.password-cont button {
+  position: absolute; /* Position the button relative to the container */
+  right: 0; /* Position to the right edge */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for perfect vertical centering */
+  /* padding: 8px 12px; */
+  padding-right: 10px;
+  background-color: #fff;
+  color: black;
+  border: none;
+  border-radius: 0 4px 4px 0; /* Adjust border-radius for the button */
+  cursor: pointer;
+}
+
+.password-cont button:hover {
+  background-color: #fff;
+  color: black;
+}

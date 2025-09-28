@@ -1,0 +1,58 @@
+
+nav {
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    padding-bottom: 15px;
+}
+
+.currency-display {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 10 0 10;
+    display: flex;
+    direction: row;
+    justify-content: end;
+    font-size: 18px;
+}
+
+li {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+li.happiness {
+    color: green
+}
+
+li.hunger {
+    color: orange;
+}
+
+li.health {
+    color: red;
+}
+
+li.coins {
+    color: gold;
+}
+
+a {
+    color: #3e3e3e;
+}
+
+.logo {
+    width: 200px;
+}
