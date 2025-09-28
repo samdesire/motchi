@@ -8,12 +8,14 @@ import { VscSmiley } from "react-icons/vsc";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsCoin } from "react-icons/bs";
 
-import meat from '../assets/meat.svg'
-import happiness from '../assets/happiness.svg'
-import heart from '../assets/health.svg'
-import cash from '../assets/cash.svg'
+interface Props {
+    happiness?: number,
+    hunger?: number,
+    health?: number,
+    money?: number,
+}
 
-function Navbar() {
+function Navbar(props: Props) {
     return (
         <nav>
             <div>
@@ -24,24 +26,20 @@ function Navbar() {
             <div className={`${styles.currencyDisplay}`}>
                 <ul>
                     <li className={`${styles.happiness}`}>
-                        <img src={happiness} alt="" className={`${styles.statusIcon}`} />
-                        {/* < VscSmiley /> */}
-                        <p>Happiness</p>
+                        < VscSmiley />
+                        <p>Happiness: {props.happiness}</p>
                     </li>
                     <li className={`${styles.hunger}`}>
-                        <img src={meat} alt="" className={`${styles.statusIcon}`} />
-                        {/* < PiBowlFood /> */}
-                        <p>Hunger</p>
+                        < PiBowlFood />
+                        <p>Hunger: {props.hunger}</p>
                     </li>
                     <li className={`${styles.health}`}>
-                        <img src={heart} alt=""  className={`${styles.statusIcon}`}/>
-                        {/* < IoIosHeartEmpty /> */}
-                        <p>Health</p>
+                        < IoIosHeartEmpty />
+                        <p>Health: {props.health}</p>
                     </li>
                     <li className={`${styles.coins}`}>
-                        <img src={cash} alt="" className={`${styles.statusIcon}`} />
-                        {/* < BsCoin /> */}
-                        <p>$2,546</p>
+                        < BsCoin />
+                        <p>Coins: {props.money}</p>
                     </li>
                 </ul>
             </div>
