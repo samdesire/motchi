@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar"
 import { NavLink } from "react-router-dom";
+import { initLocalStorage } from "../state.tsx";
 
 import styles from './Styles/home.module.css'
 
@@ -10,8 +11,21 @@ import shop_icon from '../assets/shop.svg'
 import person_icon from '../assets/person_icon.svg'
 
 import add_partner from '../assets/addprofile.svg'
+import { useEffect, useState } from "react";
 
 function Home() {
+
+    const [pet, setPet] = useState('../assets/cactee.svg');
+
+    useEffect(() => {
+        initLocalStorage();
+
+        const storedPet = localStorage.getItem('pet');
+        if (storedPet) {
+            setPet(storedPet);
+        }
+    }, []);
+
     return (
         <>
             <Navbar />

@@ -13,8 +13,8 @@ const GAME_HEIGHT = 600;
 const PLAYER_SIZE = 30;
 const PLAYER_STEP = 15;
 const PROJECTILE_SIZE = 15;
-const PROJECTILE_SPEED = 4;
-const PROJECTILE_SPAWN_RATE = 400; // ms
+const PROJECTILE_SPEED = 6;
+const PROJECTILE_SPAWN_RATE = 300; // ms
 const GAME_DURATION = 15; // seconds
 
 // --- Game Component ---
@@ -27,6 +27,8 @@ export default function Game() {
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [gameWon, setGameWon] = useState<boolean>(false);
   const [gameStarted, setGameStarted] = useState<boolean>(false);
+
+  const [petImage, setPetImage] = useState<string | null>(null);
 
   // Refs for intervals/animation frames to ensure they are cleared properly
   const gameLoopRef = useRef<number | null>(null);
@@ -46,6 +48,13 @@ export default function Game() {
     if (timerRef.current !== null) {
       clearInterval(timerRef.current);
       timerRef.current = null;
+    }
+  }, []);
+
+   useEffect(() => {
+    const savedPetImage = localStorage.getItem('pet');
+    if (savedPetImage) {
+      setPetImage(savedPetImage);
     }
   }, []);
 
@@ -186,15 +195,15 @@ export default function Game() {
   }, [gameStarted, gameOver, cleanupGame]);
 
   // --- Render Functions ---
-  const StartScreen = () => (
+ const StartScreen = () => (
     <div className={`${styles.overlay} ${styles.startOverlay}`}>
       <h2 className={styles.title}>DodgeFall</h2>
       <p className={styles.lead}>Dodge the falling blocks for {GAME_DURATION} seconds.</p>
       <p className={styles.leadSmall}>Use Arrow Keys or A/D to move.</p>
+
       <button
         type="button"
         onClick={() => {
-          // reset state for a fresh start
           setProjectiles([]);
           setTimeLeft(GAME_DURATION);
           setGameOver(false);
@@ -221,18 +230,17 @@ export default function Game() {
     <div className={styles.pageCenter}>
       <div
         className={styles.container}
-        style={{ position: 'relative', width: GAME_WIDTH, height: GAME_HEIGHT, border: '2px solid #22d3ee' }}
+        style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}
       >
         {!gameStarted && <StartScreen />}
         {gameOver && <GameOverScreen />}
 
-        {/* Game Header */}
         <div className={styles.header}>
           <span className={styles.headerTitle}>DodgeFall</span>
           <span className={styles.headerTime}>Time Left: <span className={styles.timeValue}>{timeLeft}</span></span>
         </div>
 
-        {/* Player */}
+        {/* Player: Now uses the pet image if available */}
         <div
           className={styles.player}
           style={{
@@ -240,10 +248,11 @@ export default function Game() {
             top: playerPos.y,
             width: PLAYER_SIZE,
             height: PLAYER_SIZE,
+            backgroundImage: petImage ? `url(${petImage})` : 'none',
+            backgroundColor: petImage ? 'transparent' : '#67e8f9',
           }}
         />
 
-        {/* Projectiles */}
         {projectiles.map((proj, i) => (
           <div
             key={i}
