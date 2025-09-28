@@ -8,14 +8,12 @@ import { VscSmiley } from "react-icons/vsc";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsCoin } from "react-icons/bs";
 
-interface Props {
-    happiness?: number,
-    hunger?: number,
-    health?: number,
-    money?: number,
-}
+import meat from '../assets/meat.svg'
+import happiness from '../assets/happiness.svg'
+import heart from '../assets/health.svg'
+import cash from '../assets/cash.svg'
 
-function Navbar(props: Props) {
+function Navbar() {
     return (
         <nav>
             <div>
@@ -26,20 +24,24 @@ function Navbar(props: Props) {
             <div className={`${styles.currencyDisplay}`}>
                 <ul>
                     <li className={`${styles.happiness}`}>
-                        < VscSmiley />
-                        <p>Happiness: {props.happiness}</p>
+                        <img src={happiness} alt="" className={`${styles.statusIcon}`} />
+                        {/* < VscSmiley /> */}
+                        <p>Happiness</p>
                     </li>
                     <li className={`${styles.hunger}`}>
-                        < PiBowlFood />
-                        <p>Hunger: {props.hunger}</p>
+                        <img src={meat} alt="" className={`${styles.statusIcon}`} />
+                        {/* < PiBowlFood /> */}
+                        <p>Hunger</p>
                     </li>
                     <li className={`${styles.health}`}>
-                        < IoIosHeartEmpty />
-                        <p>Health: {props.health}</p>
+                        <img src={heart} alt=""  className={`${styles.statusIcon}`}/>
+                        {/* < IoIosHeartEmpty /> */}
+                        <p>Health</p>
                     </li>
                     <li className={`${styles.coins}`}>
-                        < BsCoin />
-                        <p>Coins: {props.money}</p>
+                        <img src={cash} alt="" className={`${styles.statusIcon}`} />
+                        {/* < BsCoin /> */}
+                        <p>$2,546</p>
                     </li>
                 </ul>
             </div>

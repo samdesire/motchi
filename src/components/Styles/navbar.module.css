@@ -8,6 +8,10 @@ nav {
     padding-bottom: 15px;
 }
 
+.statusIcon {
+    width: 30px;
+}
+
 .currencyDisplay {
     display: flex;
     justify-content: space-evenly;
