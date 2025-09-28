@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./Styles/navbar.css"
 
 import logo from '../../public/motchi_logo.png'
+import motchi_pixel_logo from '../assets/motchi_pixel_logo.svg'
 
 import { PiBowlFood } from "react-icons/pi";
 import { VscSmiley } from "react-icons/vsc";
@@ -13,7 +14,7 @@ function Navbar() {
         <nav>
             <div>
                 <NavLink to='/'>
-                    <img src={`${logo}`} alt="logo for motchi" className="logo" />
+                    <img src={`${motchi_pixel_logo}`} alt="logo for motchi" className="logo" />
                 </NavLink>
             </div>
             <div className="currency-display">

@@ -5,7 +5,9 @@ import { NavLink } from "react-router-dom";
 
 import { useState } from "react";
 import { useForm } from '@tanstack/react-form'
-import logo from '../../public/motchi_logo.png'
+import motchi_pixel_logo from "../assets/motchi_pixel_logo.svg"
+import { MdOutlineVisibility } from "react-icons/md";
+import { MdOutlineVisibilityOff } from "react-icons/md";
 
 
 interface RegistrationFormValues {
@@ -16,6 +18,13 @@ interface RegistrationFormValues {
 }
 
 export function Login() {
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+    };
+
       const form = useForm({
         defaultValues: {
             username: '',
@@ -39,7 +48,7 @@ export function Login() {
     <>
         <main className='login-cont'>
             <header>
-                <img src={`${logo}`} alt="logo for motchi" className="logo" />
+                <img src={`${motchi_pixel_logo}`} alt="logo for motchi" className="logo" />
                 <h1>Sign In</h1>
             </header>
             <form className='formContainer' action="" 
@@ -81,19 +90,27 @@ export function Login() {
                                 }
                             }}
                             children={(field) => (
-                                <div className='field'>
-                                    <input type="password"
-                                            placeholder='Password'
-                                            id={field.name}
-                                            name={field.name}
-                                            value={field.state.value}
-                                            onBlur={field.handleBlur}
-                                            onChange={(e) => field.handleChange(e.target.value)}
-                                    />
-                                    {field.state.meta.errors.length > 0 && (
-                                        <p className='warning'>{field.state.meta.errors.join(", ")}</p>
-                                    )}
-                                </div>
+                                <>
+                                    <div className='field password-cont'>
+                                        <input type={showPassword ? 'text' : 'password'}
+                                                placeholder='Password'
+                                                id={field.name}
+                                                name={field.name}
+                                                value={field.state.value}
+                                                onBlur={field.handleBlur}
+                                                onChange={(e) => field.handleChange(e.target.value)}
+                                        />
+                                        <button className='icon-button'
+                                                onClick={togglePasswordVisibility}>
+                                            {showPassword ? <MdOutlineVisibilityOff /> : <MdOutlineVisibility />}
+                                        </button>
+                                    </div>
+                                    <div>
+                                        {field.state.meta.errors.length > 0 && (
+                                            <p className='warning'>{field.state.meta.errors.join(", ")}</p>
+                                        )}
+                                    </div>
+                                </>
                             )}
                         />  
                     </div>

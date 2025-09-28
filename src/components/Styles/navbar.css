@@ -4,6 +4,7 @@ nav {
     direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: 50px;
     padding-bottom: 15px;
 }
 
@@ -19,7 +20,6 @@ ul {
     padding: 0 10 0 10;
     display: flex;
     direction: row;
-    /* min-width: 700px; */
     justify-content: end;
     font-size: 18px;
 }
