@@ -25,3 +25,5 @@ function spendMoney(amount: number): boolean {
     }
     return false;
 }
+
+export default spendMoney

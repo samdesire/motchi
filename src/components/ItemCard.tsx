@@ -9,7 +9,13 @@ interface Props {
     itemCost: number
 }
 
+import spendMoney from '../state'
+
 function ItemCard(props : Props) {
+    const handleBuy = (amount : number) => {
+        console.log(spendMoney(amount))
+    }
+
     return (
         <>
             <div className={`${styles.card}`}>
@@ -19,7 +25,7 @@ function ItemCard(props : Props) {
                     <p>{props.itemDescription}</p>
                     <div className={`${styles.purchace}`}>
                         <p>Price: ${props.itemCost}</p>
-                        <button>
+                        <button onClick={() => handleBuy(props.itemCost)}>
                             Buy
                         </button>
                     </div>

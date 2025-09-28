@@ -1,6 +1,6 @@
 import './Styles/pets.css'
 
-import PetCard from '../components/petCard';
+import PetCard from '../components/PetCard';
 import Navbar from '../components/Navbar';
 
 import pinkMotchi from '../assets/pink_motchi.svg'
