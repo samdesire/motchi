@@ -9,7 +9,7 @@ This document describes the APIs implemented in the backend server. It provides 
   ```json
   {
     "name": "John Doe",
-    "email": "user@example.com",
+    "username": "user123",
     "password": "password123"
   }
   ```
@@ -40,13 +40,12 @@ This document describes the APIs implemented in the backend server. It provides 
 
 ## 3. Add Co-Owner
 - **Endpoint**: `POST /add_co_owner`
-- **Description**: Add another user as a co-owner of a pet.
-- **Authentication**: Requires a valid OAuth2 token.
+- **Description**: Add another user as a co-owner of the caller's pet. The caller must be authenticated and must own a pet. The server derives the pet id from the caller's account; clients only provide the username of the target user.
+- **Authentication**: Requires a valid OAuth2 token (password-grant issued token).
 - **Request Body**:
   ```json
   {
-    "pet_id": 1,
-    "user_id": 2
+    "username": "other_user"
   }
   ```
 - **Response**:
@@ -57,16 +56,17 @@ This document describes the APIs implemented in the backend server. It provides 
 
 ---
 
-## 4. OAuth2 Token
-- **Endpoint**: `POST /token`
-- **Description**: Obtain an OAuth2 token for authentication.
-- **Request Body**:
+## 4. OAuth2 Token & /connect
+- **Endpoint (server token endpoint)**: `POST /token`
+- **Description**: OAuth2 token endpoint. The server restricts allowed grant types to `password` and `refresh_token` to ensure tokens are user-scoped. Client-only grants like `client_credentials` are rejected at this endpoint.
+- **Request Body (password grant)**:
   ```x-www-form-urlencoded
-  grant_type=client_credentials&client_id=client_id&client_secret=client_secret
+  grant_type=password&username=<username>&password=<password>&client_id=<client_id>&client_secret=<client_secret>
   ```
+- **Convenience endpoint**: `POST /connect` — accepts JSON `{ "username": "...", "password": "..." }`. This endpoint validates credentials server-side and then requests a password grant token on the client's behalf, returning the token JSON. Use this from trusted clients or development tooling.
 - **Response**:
-  - `200 OK`: Returns an access token.
-  - `400 Bad Request`: Invalid client credentials.
+  - `200 OK`: Returns access token JSON which includes server-added extension fields: `user_id` (database id) and `pet_id` (if available).
+  - `400/401`: Invalid credentials or unsupported grant type.
 
 ---
 
@@ -83,12 +83,19 @@ This document describes the APIs implemented in the backend server. It provides 
 ## 6. WebSocket Connection
 - **Endpoint**: `GET /ws`
 - **Description**: Establish a WebSocket connection for real-time communication.
-- **Authentication**: Requires a valid OAuth2 token.
+- **Authentication**: Requires a valid OAuth2 token (user-scoped). Tokens must include `user_id` (password grant); client-only tokens are rejected.
 - **Behavior**:
   - Handles incoming messages and sends responses.
   - Sends periodic ping messages to keep the connection alive.
+  - All pet-related operations use server-derived ownership — clients must not attempt to set `pet_id`.
 - **Message Format**:
   - Incoming and outgoing messages follow the JSON schema defined in `websocket_message_schema.json`.
+  - Supported incoming messages (examples):
+    - PetMoneyUpdate: `{ "type": "PetMoneyUpdate", "amount": 10 }` — the server will apply this to the caller's pet.
+    - GetData: `{ "type": "GetData" }` — request the server to return the caller's pet data.
+  - Supported outgoing messages:
+    - ResultResponse: `{ "type": "ResultResponse", "status": "success", "newMoney": 90 }`.
+    - PetDataResponse: `{ "type": "PetDataResponse", "status": "success", "pet": { "id": 1, "name": "Fluffy", "money": 100, ... } }`.
 
 ---
 

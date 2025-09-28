@@ -9,6 +9,6 @@ services:
     volumes:
       - ./game.db:/root/game.db
     environment:
-      - OAUTH2_CLIENT_ID=your_client_id
-      - OAUTH2_CLIENT_SECRET=your_client_secret
+      - OAUTH2_CLIENT_ID=${OAUTH2_CLIENT_ID}
+      - OAUTH2_CLIENT_SECRET=${OAUTH2_CLIENT_SECRET}
       - LOG_LEVEL=development

@@ -1,5 +1,5 @@
 # Use the official Golang image as the base image
-FROM golang:1.20 as builder
+FROM golang:1.24.0 AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -13,14 +13,14 @@ RUN go mod download
 # Copy the application source code
 COPY . .
 
-# Build the Go application
+# Build the Go application. A standard dynamic build is fine.
 RUN go build -o main .
 
-# Use a minimal base image for the final container
-FROM alpine:latest
+# Use a debian-slim image which is compatible with the builder's libraries
+FROM debian:12-slim
 
-# Install SQLite for database support
-RUN apk --no-cache add sqlite
+# Install SQLite using apt-get
+RUN apt-get update && apt-get install -y sqlite3 && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory inside the container
 WORKDIR /root/
@@ -33,9 +33,6 @@ COPY ./game.db ./schema.sql ./
 
 # Copy the .env file for sensitive keys
 COPY .env .
-
-# Load environment variables from the .env file
-ENV $(cat .env | xargs)
 
 # Initialize the database schema
 RUN sqlite3 game.db < schema.sql

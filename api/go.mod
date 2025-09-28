@@ -5,6 +5,7 @@ go 1.24.0
 require (
 	github.com/go-oauth2/oauth2/v4 v4.5.4
 	github.com/gorilla/websocket v1.5.3
+	github.com/joho/godotenv v1.5.1
 	github.com/mattn/go-sqlite3 v1.14.32
 	golang.org/x/crypto v0.42.0
 )

@@ -4,29 +4,24 @@
   "description": "Schema for messages sent via WebSocket",
   "oneOf": [
     {
-      "title": "ValueChangeRequest",
+      "title": "PetMoneyUpdate",
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["value_change_request"],
-          "description": "Indicates a request to change a value."
+          "enum": ["value_change_request", "PetMoneyUpdate"],
+          "description": "Optional type marker for a value change request."
         },
         "pet_id": {
           "type": "integer",
           "description": "The ID of the pet whose value is being updated."
-        },
-        "attribute": {
-          "type": "string",
-          "enum": ["money", "health", "hunger", "happiness"],
-          "description": "The attribute of the pet being updated."
         },
         "amount": {
           "type": "integer",
           "description": "The amount by which the attribute is being updated."
         }
       },
-      "required": ["type", "pet_id", "attribute", "amount"],
+  "required": ["amount"],
       "additionalProperties": false
     },
     {
@@ -35,7 +30,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["result_response"],
+          "enum": ["result_response", "ResultResponse"],
           "description": "Indicates the result of a value change request."
         },
         "status": {
@@ -47,21 +42,20 @@
           "type": "integer",
           "description": "The ID of the pet whose value was being updated."
         },
-        "attribute": {
-          "type": "string",
-          "enum": ["money"],
-          "description": "The attribute of the pet that was updated."
-        },
         "amount": {
           "type": "integer",
           "description": "The amount that was requested to be updated."
         },
-        "new_value": {
+        "newMoney": {
           "type": "integer",
-          "description": "The new value of the attribute after a successful update."
+          "description": "The new money value after a successful update (matching server response key)."
+        },
+        "message": {
+          "type": "string",
+          "description": "Optional human-readable message on failure."
         }
       },
-      "required": ["type", "status", "pet_id", "attribute", "amount"],
+  "required": ["type", "status"],
       "additionalProperties": false
     },
     {
@@ -75,6 +69,52 @@
         }
       },
       "required": ["type"],
+      "additionalProperties": false
+    }
+    ,
+    {
+      "title": "GetData",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["get_data", "GetData"],
+          "description": "Request the server to return the caller's associated pet data."
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    {
+      "title": "PetDataResponse",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["pet_data_response", "PetDataResponse"],
+          "description": "Server response carrying the pet's data."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["success", "fail"]
+        },
+        "pet": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer" },
+            "name": { "type": "string" },
+            "money": { "type": "integer" },
+            "health": { "type": "integer" },
+            "hunger": { "type": "integer" },
+            "happiness": { "type": "integer" },
+            "main_owner": { "type": "integer" },
+            "owner2": { "type": ["integer", "null"] }
+          },
+          "required": ["id", "name", "money", "health", "hunger", "happiness", "main_owner"]
+        },
+        "message": { "type": "string" }
+      },
+      "required": ["type", "status"],
       "additionalProperties": false
     }
   ]
