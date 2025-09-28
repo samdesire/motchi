@@ -21,6 +21,8 @@ body {
 
 .centerColumn {
   display: flex;
+  flex-direction: column;
+  gap: 50px;
   justify-content: center;
   align-items: center;
   margin: 0px;
@@ -40,7 +42,11 @@ body {
 }
 
 .actionBtn.personBtn {
-    background-color: #FFE29A;
+  background-color: #FFE29A;
+}
+
+.actionBtn.addPartnerBtn {
+  background-color: #653818;
 }
 
 .actionBtn.petsBtn {

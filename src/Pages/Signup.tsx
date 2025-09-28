@@ -8,7 +8,6 @@ function Signup() {
 
     interface RegistrationFormValues {
         username: string;
-        email: string;
         password: string;
         confirm_password: string;
     }
@@ -23,7 +22,6 @@ function Signup() {
         onSubmit: ({value}) => {
             const user: RegistrationFormValues = {
                 username: value.username,
-                email: value.email,
                 password: value.password,
                 confirm_password: value.confirm_password
             }
@@ -64,30 +62,6 @@ function Signup() {
                                     />
                                     {field.state.meta.errors.length > 0 && (
                                         <p className='warning'>{field.state.meta.errors.join(", ")}</p>
-                                    )}
-                                </div>
-                            )}
-                        />
-                        {/* Email */}
-                        <form.Field 
-                            name='email'
-                            validators={{
-                                onChange: ({ value }) => {
-                                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                                    return !emailRegex.test(value) ? "Please enter a valid email." : undefined;
-                                }
-                            }}
-                            children={(field) => (
-                                <div className={`${styles.field}`}>
-                                    <input type="email"
-                                            placeholder='Email'
-                                            id={ field.name }
-                                            value={ field.state.value }
-                                            onBlur={ field.handleBlur }
-                                            onChange={ (e) => field.handleChange(e.target.value) }
-                                    />
-                                    {field.state.meta.errors.length > 0 && (
-                                        <p className={`${styles.warning}`}>{field.state.meta.errors.join(", ")}</p>
                                     )}
                                 </div>
                             )}
