@@ -7,6 +7,7 @@ import Signup from './Pages/Signup';
 import Profile from './Pages/Profile';
 import Pets from './Pages/Pets'
 import Shop from './Pages/Shop';
+import Game from './Pages/Game';
 
 import './App.css'
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/profile' element={<Profile />}></Route>
           <Route path='/pets' element={<Pets />}></Route>
           <Route path='/shop' element={<Shop />}></Route>
+          <Route path='/mingames' element={<Game />}></Route>
         </Routes>
       </QueryClientProvider>
     </>
