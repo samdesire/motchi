@@ -6,14 +6,26 @@ interface Props {
     itemValue: number,
     itemDescription: string,
     itemImg: string,
-    itemCost: number
+    itemCost: number,
+    type: string
 }
 
-import {spendMoney} from '../state.tsx'
+import {addHappiness, addHealth, addHunger, spendMoney} from '../state.tsx'
 
 function ItemCard(props : Props) {
     const handleBuy = (amount : number) => {
-        console.log(spendMoney(amount))
+        if(spendMoney(amount)) {
+            if(props.type == 'happiness') {
+                addHappiness(10)    
+            } else if (props.type == 'health')  {
+                addHealth(10) 
+            } else if (props.type == 'hunger') {
+                addHunger(10)
+            }
+            alert("Item Purchased!")
+        } else {
+            alert("Not enough money!")
+        }
     }
 
     return (
