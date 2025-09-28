@@ -1,5 +1,5 @@
 
-import './Styles/login.css'
+import styles from './Styles/login.module.css'
 
 import { NavLink } from "react-router-dom";
 
@@ -46,17 +46,17 @@ export function Login() {
 
   return (
     <>
-        <main className='login-cont'>
+        <main className={`${styles.loginCont}`}>
             <header>
-                <img src={`${motchi_pixel_logo}`} alt="logo for motchi" className="logo" />
+                <img src={`${motchi_pixel_logo}`} alt="logo for motchi" className={`${styles.logo}`} />
                 <h1>Sign In</h1>
             </header>
-            <form className='formContainer' action="" 
+            <form className={`${styles.formContainer}`} action="" 
                         onSubmit={(e) => {
                             e.preventDefault();
                             form.handleSubmit();}}
                     >
-                    <div className='form'>
+                    <div className={`${styles.form}`}>
                         {/* Username */}
                         <form.Field
                             name='username'
@@ -66,7 +66,7 @@ export function Login() {
                                 }
                             }}
                             children={(field) => (
-                                <div className='field'>
+                                <div className={`${styles.field}`}>
                                     <input 
                                         placeholder='Username'
                                         type='text'
@@ -76,7 +76,7 @@ export function Login() {
                                         onChange={ (e) => field.handleChange(e.target.value) } 
                                     />
                                     {field.state.meta.errors.length > 0 && (
-                                        <p className='warning'>{field.state.meta.errors.join(", ")}</p>
+                                        <p className={`${styles.warning}`}>{field.state.meta.errors.join(", ")}</p>
                                     )}
                                 </div>
                                 )}
@@ -91,7 +91,7 @@ export function Login() {
                             }}
                             children={(field) => (
                                 <>
-                                    <div className='field password-cont'>
+                                    <div className={`${styles.field} ${styles.passwordCont}`}>
                                         <input type={showPassword ? 'text' : 'password'}
                                                 placeholder='Password'
                                                 id={field.name}
@@ -100,25 +100,25 @@ export function Login() {
                                                 onBlur={field.handleBlur}
                                                 onChange={(e) => field.handleChange(e.target.value)}
                                         />
-                                        <button className='icon-button'
+                                        <button className={`${styles.iconButton}`}
                                                 onClick={togglePasswordVisibility}>
                                             {showPassword ? <MdOutlineVisibilityOff /> : <MdOutlineVisibility />}
                                         </button>
                                     </div>
                                     <div>
                                         {field.state.meta.errors.length > 0 && (
-                                            <p className='warning'>{field.state.meta.errors.join(", ")}</p>
+                                            <p className={`${styles.warning}`}>{field.state.meta.errors.join(", ")}</p>
                                         )}
                                     </div>
                                 </>
                             )}
                         />  
                     </div>
-                    <button type='submit' className='CTA'>Log in</button>
+                    <button type='submit' className={`${styles.CTA}`}>Log in</button>
 
-                    <div className="register">
+                    <div className={`${styles.register}`}>
                         <p>Don't have an account?</p>
-                        <NavLink to='/sign-up' className='register-link'>
+                        <NavLink to='/sign-up' className={`${styles.registerLink}`}>
                             <p>Register</p>
                         </NavLink>
                     </div>

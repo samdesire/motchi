@@ -1,9 +1,9 @@
 body {
-    margin: 0px 350px 0px 350px;
-    overflow: hidden;
+  margin: 0px 350px 0px 350px;
+  overflow: hidden;
 }
 
-.game-container {
+.gameContainer {
   display: flex;
   justify-content: center;   /* horizontally center all columns */
   align-items: center;       /* vertically center content */
@@ -11,7 +11,7 @@ body {
   gap: 75px;                 /* space between columns */
 }
 
-.side-column {
+.sideColumn {
   display: flex;
   flex-direction: column;    /* stack buttons vertically */
   justify-content: center;   /* center vertically */
@@ -19,7 +19,7 @@ body {
   gap: 100px;                 /* space between buttons */
 }
 
-.center-column {
+.centerColumn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,27 +27,27 @@ body {
   padding: 0px;
 }
 
-.pet-img {
+.petImg {
     width: 300px;
 }
 
-.pet-img:hover {
+.petImg:hover {
     animation: bounce 1.5s infinite;
 }
 
-.game-icon {
+.gameIcon {
     width: 50px;
 }
 
-.action-btn.person-btn {
+.actionBtn.personBtn {
     background-color: #FFE29A;
 }
 
-.action-btn.pets-btn {
+.actionBtn.petsBtn {
     background-color: #FFF3E6;
 }
 
-.action-btn.game-btn {
+.actionBtn.gameBtn {
     background-color: #656464;
 }
 
@@ -57,7 +57,7 @@ body {
   animation: bounce 2s infinite;
 }
 
-.action-btn {
+.actionBtn {
   width: 200px;
   height: 60px;
   font-size: 1.5rem;
@@ -69,7 +69,7 @@ body {
   border-radius: 20px 40px 15px 25px;
 }
 
-.action-btn:hover {
+.actionBtn:hover {
   background: #C7C5E6;
   transform: scale(1.1);
   animation: slow-shake 1.5s infinite;

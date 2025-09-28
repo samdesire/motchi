@@ -4,6 +4,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Home from "./Pages/Home"
 import { Login } from './Pages/Login';
 import Signup from './Pages/Signup';
+import Profile from './Pages/Profile';
+import Pets from './Pages/Pets'
+import Shop from './Pages/Shop';
 
 import './App.css'
 
@@ -13,10 +16,13 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-          <Routes>
+        <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/sign-up' element={<Signup />}></Route>
+          <Route path='/profile' element={<Profile />}></Route>
+          <Route path='/pets' element={<Pets />}></Route>
+          <Route path='/shop' element={<Shop />}></Route>
         </Routes>
       </QueryClientProvider>
     </>

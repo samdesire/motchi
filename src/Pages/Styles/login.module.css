@@ -46,12 +46,12 @@ input {
     text-align: center;
     margin: 0px;
 }
-.register-link {
+.registerLink {
     color: #C7C5E6;
     font-weight: 600;
 }
 
-.icon-button {
+.iconButton {
     background: none;
     border: none;
     padding: 0;
@@ -60,14 +60,14 @@ input {
     outline: inherit; /* Inherit outline styles for accessibility */
 }
 
-.password-cont {
+.passwordCont {
     position: relative; /* Essential for positioning the button */
     display: flex; /* Optional: Use flexbox for easy alignment */
     align-items: center; /* Optional: Vertically center items in flexbox */
     /* overflow: hidden;  */
 }
 
-.password-cont button {
+.passwordCont button {
   position: absolute; /* Position the button relative to the container */
   right: 0; /* Position to the right edge */
   top: 50%; /* Center vertically */
@@ -81,7 +81,7 @@ input {
   cursor: pointer;
 }
 
-.password-cont button:hover {
+.passwordCont button:hover {
   background-color: #fff;
   color: black;
 }

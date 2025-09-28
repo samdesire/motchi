@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "./Styles/navbar.css"
+import styles from './Styles/navbar.module.css'
 
 import logo from '../../public/motchi_logo.png'
 import motchi_pixel_logo from '../assets/motchi_pixel_logo.svg'
@@ -14,24 +14,24 @@ function Navbar() {
         <nav>
             <div>
                 <NavLink to='/'>
-                    <img src={`${motchi_pixel_logo}`} alt="logo for motchi" className="logo" />
+                    <img src={`${motchi_pixel_logo}`} alt="logo for motchi" className={`${styles.logo}`} />
                 </NavLink>
             </div>
-            <div className="currency-display">
+            <div className={`${styles.currencyDisplay}`}>
                 <ul>
-                    <li className="happiness">
+                    <li className={`${styles.happiness}`}>
                         < VscSmiley />
                         <p>Happiness</p>
                     </li>
-                    <li className="hunger">
+                    <li className={`${styles.hunger}`}>
                         < PiBowlFood />
                         <p>Hunger</p>
                     </li>
-                    <li className="health">
+                    <li className={`${styles.health}`}>
                         < IoIosHeartEmpty />
                         <p>Health</p>
                     </li>
-                    <li className="coins">
+                    <li className={`${styles.coins}`}>
                         < BsCoin />
                         <p>$2,546</p>
                     </li>

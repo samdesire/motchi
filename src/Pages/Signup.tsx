@@ -1,6 +1,6 @@
 import { useForm } from "@tanstack/react-form";
 
-import './Styles/signup.css'
+import styles from './Styles/signup.module.css'
 import motchi_pixel_logo from '../assets/motchi_pixel_logo.svg'
 
 
@@ -34,17 +34,17 @@ function Signup() {
 
     return (
         <>
-            <main className='login-cont'>
+            <main className={`${styles.loginCont}`}>
                 <header>
-                    <img src={`${motchi_pixel_logo}`} alt="logo for motchi" className="logo" />
+                    <img src={`${motchi_pixel_logo}`} alt="logo for motchi" className={`${styles.logo}`} />
                     <h1>Sign Up</h1>
                 </header>
-                    <form className='formContainer' action="" 
+                    <form className={`${styles.formContainer}`} action="" 
                     onSubmit={(e) => {
                         e.preventDefault();
                         form.handleSubmit();}}>
                     {/* Username */}
-                    <div className='form'>
+                    <div className={`${styles.form}`}>
                         <form.Field 
                             name='username'
                             validators={{
@@ -53,7 +53,7 @@ function Signup() {
                                 }
                             }}
                             children={(field) => (
-                                <div className='field'>
+                                <div className={`${styles.field}`}>
                                     <input 
                                         placeholder='Username'
                                         type='text'
@@ -78,7 +78,7 @@ function Signup() {
                                 }
                             }}
                             children={(field) => (
-                                <div className='field'>
+                                <div className={`${styles.field}`}>
                                     <input type="email"
                                             placeholder='Email'
                                             id={ field.name }
@@ -87,7 +87,7 @@ function Signup() {
                                             onChange={ (e) => field.handleChange(e.target.value) }
                                     />
                                     {field.state.meta.errors.length > 0 && (
-                                        <p className='warning'>{field.state.meta.errors.join(", ")}</p>
+                                        <p className={`${styles.warning}`}>{field.state.meta.errors.join(", ")}</p>
                                     )}
                                 </div>
                             )}
@@ -101,7 +101,7 @@ function Signup() {
                                 }
                             }}
                             children={(field) => (
-                                <div className='field'>
+                                <div className={`${styles.field}`}>
                                     <input type="password"
                                             placeholder='Password'
                                             id={field.name}
@@ -111,7 +111,7 @@ function Signup() {
                                             onChange={(e) => field.handleChange(e.target.value)}
                                     />
                                     {field.state.meta.errors.length > 0 && (
-                                        <p className='warning'>{field.state.meta.errors.join(", ")}</p>
+                                        <p className={`${styles.warning}`}>{field.state.meta.errors.join(", ")}</p>
                                     )}
                                 </div>
                             )}
@@ -126,7 +126,7 @@ function Signup() {
                                 }
                             }}
                             children={(field) => (
-                                <div className='field'>
+                                <div className={`${styles.field}`}>
                                     <input type="password"
                                             placeholder='Confirm Password'
                                             id={field.name}
@@ -136,13 +136,13 @@ function Signup() {
                                             onChange={(e) => field.handleChange(e.target.value)}
                                     />
                                     {field.state.meta.errors.length > 0 && (
-                                        <p className='warning'>{field.state.meta.errors.join(", ")}</p>
+                                        <p className={`${styles.warning}`}>{field.state.meta.errors.join(", ")}</p>
                                     )}
                                 </div>
                             )}
                         /> 
                     </div>
-                    <button type='submit' className='CTA'>Sign Up</button>
+                    <button type='submit' className={`${styles.CTA}`}>Sign Up</button>
                 </form>
             </main>
         </>

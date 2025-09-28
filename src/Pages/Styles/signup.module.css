@@ -6,6 +6,10 @@ main {
   gap: 200px;  
 }
 
+header {
+    width: 150px;
+}
+
 form {
     display: flex;
     flex-direction: column;
