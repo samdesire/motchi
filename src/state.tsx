@@ -19,7 +19,7 @@ export function initLocalStorage() {
 export function addHappiness(amount: number) {
     const happiness = localStorage.getItem('happiness');
     if (happiness !== null && parseInt(happiness) + amount <= 100) {
-        localStorage.setItem('happiness', (parseInt(happiness) + 1).toString());
+        localStorage.setItem('happiness', (parseInt(happiness) + amount).toString());
     } else {
         localStorage.setItem('happiness', '100');
     }
@@ -28,7 +28,7 @@ export function addHappiness(amount: number) {
 export function addHunger(amount: number) {
     const hunger = localStorage.getItem('hunger');
     if (hunger !== null && parseInt(hunger) + amount <= 100) {
-        localStorage.setItem('hunger', (parseInt(hunger) + 1).toString());
+        localStorage.setItem('hunger', (parseInt(hunger) + amount).toString());
     } else {
         localStorage.setItem('hunger', '100');
     }
