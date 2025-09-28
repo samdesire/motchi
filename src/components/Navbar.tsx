@@ -8,7 +8,14 @@ import { VscSmiley } from "react-icons/vsc";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { BsCoin } from "react-icons/bs";
 
-function Navbar() {
+interface Props {
+    happiness?: number,
+    hunger?: number,
+    health?: number,
+    money?: number,
+}
+
+function Navbar(props: Props) {
     return (
         <nav>
             <div>
@@ -20,19 +27,19 @@ function Navbar() {
                 <ul>
                     <li className={`${styles.happiness}`}>
                         < VscSmiley />
-                        <p>Happiness</p>
+                        <p>Happiness: {props.happiness}</p>
                     </li>
                     <li className={`${styles.hunger}`}>
                         < PiBowlFood />
-                        <p>Hunger</p>
+                        <p>Hunger: {props.hunger}</p>
                     </li>
                     <li className={`${styles.health}`}>
                         < IoIosHeartEmpty />
-                        <p>Health</p>
+                        <p>Health: {props.health}</p>
                     </li>
                     <li className={`${styles.coins}`}>
                         < BsCoin />
-                        <p>$2,546</p>
+                        <p>Coins: {props.money}</p>
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,6 @@
 export function initLocalStorage() {
     if (localStorage.getItem('money') === null) {
-        localStorage.setItem('money', '0');
+        localStorage.setItem('money', '10');
     } 
     if (localStorage.getItem('happiness') === null) {
         localStorage.setItem('happiness', '50');

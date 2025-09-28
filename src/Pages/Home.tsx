@@ -16,6 +16,10 @@ import { useEffect, useState } from "react";
 function Home() {
 
     const [pet, setPet] = useState('../assets/cactee.svg');
+    const [money, setMoney] = useState(0);
+    const [happiness, setHappiness] = useState(0);
+    const [health, setHealth] = useState(0);
+    const [hunger, setHunger] = useState(0);
 
     useEffect(() => {
         initLocalStorage();
@@ -24,11 +28,27 @@ function Home() {
         if (storedPet) {
             setPet(storedPet);
         }
+        const storedMoney = localStorage.getItem('money');
+        if (storedMoney) {
+            setMoney(parseInt(storedMoney));
+        }
+        const storedHappiness = localStorage.getItem('happiness');
+        if (storedHappiness) {
+            setHappiness(parseInt(storedHappiness));
+        }
+        const storedHealth = localStorage.getItem('health');
+        if (storedHealth) {
+            setHealth(parseInt(storedHealth));
+        }
+        const storedHunger = localStorage.getItem('hunger');
+        if (storedHunger) {
+            setHunger(parseInt(storedHunger));
+        }
     }, []);
 
     return (
         <>
-            <Navbar />
+            <Navbar money={money} happiness={happiness} health={health} hunger={hunger} />
 
             <main className={`${styles.gameContainer}`}>
             {/* <!-- Left column --> */}
