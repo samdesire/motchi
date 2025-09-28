@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styles from './Styles/navbar.module.css'
 
-import logo from '../../public/motchi_logo.png'
 import motchi_pixel_logo from '../assets/motchi_pixel_logo.svg'
 
 import { PiBowlFood } from "react-icons/pi";

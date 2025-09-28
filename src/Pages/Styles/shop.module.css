@@ -1,0 +1,16 @@
+body {
+    overflow: visible;
+}
+
+.shopItems {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two columns of equal width */
+    gap: 20px; /* Optional: Adds a gap between columns */
+}
+
+.mainShop {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    gap: 25px;
+}
