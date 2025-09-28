@@ -8,7 +8,6 @@ This document describes the APIs implemented in the backend server. It provides 
 - **Request Body**:
   ```json
   {
-    "name": "John Doe",
     "username": "user123",
     "password": "password123"
   }

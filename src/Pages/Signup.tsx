@@ -2,6 +2,8 @@ import { useForm } from "@tanstack/react-form";
 
 import './Styles/signup.css'
 import motchi_pixel_logo from '../assets/motchi_pixel_logo.svg'
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 
 function Signup() {
@@ -12,6 +14,37 @@ function Signup() {
         password: string;
         confirm_password: string;
     }
+
+    const mutation = useMutation({
+        mutationFn: (newUser: RegistrationFormValues) => {
+            if(newUser.password !== newUser.confirm_password) {
+                alert("Passwords do not match");
+                return Promise.reject("Passwords do not match");
+            }
+
+            const params = {
+                username: newUser.username,
+                password: newUser.password
+            };
+
+            return axios.post('http://localhost:8080/create_user', params, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+        },
+        onSuccess: (data) => {
+            // store full token JSON (access_token, expires_in, extensions like user_id/pet_id)
+            console.log(data);
+            localStorage.setItem('auth_token', JSON.stringify(data.data));
+            console.log('Login successful, token saved.');
+        },
+        onError: (err) => {
+            alert(err);
+            console.error('Login error', err);
+        }
+    });
+
 
     const form = useForm({
         defaultValues: {
@@ -28,7 +61,7 @@ function Signup() {
                 confirm_password: value.confirm_password
             }
             console.log(value)
-            // alert(JSON.stringify(value, null, 2))
+            mutation.mutate(user);
         },
     })
 

@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar"
 
 import './Styles/home.css'
 
+
 import pet from '../assets/cactee.svg'
 import game_icon from '../assets/game_icon.svg'
 import pets_icon from '../assets/pets.svg'
@@ -12,7 +13,6 @@ function Home() {
     return (
         <>
             <Navbar />
-
             <main className="game-container">
             {/* <!-- Left column --> */}
                 <div className="side-column">

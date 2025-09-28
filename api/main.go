@@ -450,6 +450,14 @@ func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	// Updated INSERT statement to include name
 	_, err = db.Exec("INSERT INTO users (username, password, SO, pet_id) VALUES (?, ?, NULL, NULL)", req.Username, hashedPassword)
 	if err != nil {
+		// Detect sqlite unique constraint on username and return a helpful error
+		if strings.Contains(err.Error(), "UNIQUE constraint failed") && strings.Contains(err.Error(), "users.username") {
+			logMessage("create_user_failed", map[string]interface{}{"username": req.Username, "reason": "username_taken"})
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(map[string]string{"error": "invalid_request", "reason": "username_taken"})
+			return
+		}
 		logMessage("create_user_error", map[string]interface{}{"error": err.Error()})
 		http.Error(w, "Error creating user", http.StatusInternalServerError)
 		return
